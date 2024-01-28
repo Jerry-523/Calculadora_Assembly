@@ -1,6 +1,12 @@
 #include<iostream>
-
 using namespace std;
+
+extern "C" float mais(int x, int y);    
+extern "C" float menos(int x, int y);  
+extern "C" float vezes(int x, int y);  
+extern "C" float dividir(int x, int y);  
+    
+
 
 void adicao();
 void subtracao();
@@ -11,7 +17,7 @@ int main() {
 
     system("clear");
     int i, x;
-
+    cout << endl;
     cout << "\t###########################\n" << 
             "\t###       [ MENU ]      ###\n" << 
             "\t###########################\n" << 
@@ -48,7 +54,7 @@ void subtracao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = a - b;
+    result = menos(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###    [ Subtracao ]    ###\n" << 
@@ -75,7 +81,7 @@ void adicao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = a + b;
+    result = mais(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###      [ Adicao ]     ###\n" << 
@@ -102,7 +108,7 @@ void multiplicacao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = a * b;
+    result = vezes(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###  [ Multiplicacao ]  ###\n" << 
@@ -129,7 +135,7 @@ void divisao(){
     cin >> a;
     cout << "\t => Insira o quociente: ";
     cin >> b;
-    result = a / b;
+    result = dividir(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###     [ Divisao ]     ###\n" << 
