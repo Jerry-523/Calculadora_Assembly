@@ -1,29 +1,29 @@
 section .text
 
-    global mais
-    global menos
-    global vezes
-    global dividir
-
-        mais:
-            mov EAX, EDI
-            add EAX, ESI
-            int 0x80
+    global addition
+        addition:
+            mov EAX, ESI
+            add EAX, EDI
             ret
-
-        menos:
+        
+        
+    global subtraction
+        subtraction:
             mov EAX, EDI
             sub EAX, ESI
             ret
 
-        vezes:
+    global multiplication
+        multiplication:
             mov EAX, EDI
             imul EAX, ESI
             ret
 
-        dividir:
+    global division
+        division:
             mov EAX, EDI   
             xor EDX, EDX   
-            div ESI         
-            ret                       
-    
+            idiv ESI         
+            ret  
+
+

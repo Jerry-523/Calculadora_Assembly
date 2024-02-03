@@ -1,52 +1,64 @@
 #include<iostream>
+#include <thread>
 using namespace std;
 
-extern "C" float mais(int x, int y);    
-extern "C" float menos(int x, int y);  
-extern "C" float vezes(int x, int y);  
-extern "C" float dividir(int x, int y);  
-    
+extern "C" int addition(int x, int y);
+extern "C" int subtraction(int x, int y);
+extern "C" int multiplication(int x, int y);
+extern "C" int division(int x, int y); 
 
-
-void adicao();
-void subtracao();
-void multiplicacao();
-void divisao();
+void sum();
+void subtract();
+void multiply();
+void divide();
 
 int main() {
-
     system("clear");
-    int i, x;
-    cout << endl;
-    cout << "\t###########################\n" << 
-            "\t###       [ MENU ]      ###\n" << 
-            "\t###########################\n" << 
-            "\t# 1- [   Adicao         ] #\n" << 
-            "\t# 2- [   Subtracao      ] #\n" << 
-            "\t# 3- [   Multiplicacao  ] #\n" << 
-            "\t# 4- [   Divisao        ] #\n" <<
-            "\t###########################\n" << 
-            "\t => Choose: ";
-    while(true){
-        cin >> x;
-        if (x == 1) {
-            adicao();
-        }else if (x == 2) {
-            subtracao();
-        }else if (x == 3) {
-            multiplicacao();
-        }else if (x == 4) {
-            divisao();
-        }else {
-            main();
+    int choice;
+
+    while (true) {
+        system("clear");
+        cout << "\n\t###########################\n"
+             << "\t###       [ MENU ]      ###\n"
+             << "\t###########################\n"
+             << "\t# 1- [   Adicao         ] #\n"
+             << "\t# 2- [   Subtracao      ] #\n"
+             << "\t# 3- [   Multiplicacao  ] #\n"
+             << "\t# 4- [   Divisao        ] #\n"
+             << "\t# 0- [   Sair           ] #\n"
+             << "\t###########################\n"
+             << "\t => Choose: ";
+
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                sum();
+                break;
+            case 2:
+                subtract();
+                break;
+            case 3:
+                multiply();
+                break;
+            case 4:
+                divide();
+                break;
+            case 0:
+                return 0;
+            default:
+                cout << "        Invalid choice. Please try again.\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(2200));
         }
-
     }
+
+    return 0;
 }
 
-void subtracao(){
+
+void subtract(){
     system("clear");
-    float a, b, result, x;
+    int a, b, result, x;
     cout << "\t###########################\n" << 
             "\t###    [ Subtracao ]    ###\n" << 
             "\t###########################\n" <<
@@ -54,26 +66,25 @@ void subtracao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = menos(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###    [ Subtracao ]    ###\n" << 
             "\t###########################\n";
-    cout << "\t => RESULTADO: " << result << endl;
+    cout << "\t => RESULTADO: " << subtraction(a, b) << endl;
     cout << "\t [1] => Again" << endl;
     cout << "\t [0] => Go to menu" << endl;
     cout << "\t Choose: ";
     cin >> x;
     if (x == 1) {
-        subtracao();
+        subtract();
     } else {
-        main();
+        return;
     }
 }
 
-void adicao(){
+void sum(){
     system("clear");
-    float a, b, result, x;
+    int a, b, result, x;
     cout << "\t###########################\n" << 
             "\t###      [ Adicao ]     ###\n" << 
             "\t###########################\n" <<
@@ -81,26 +92,25 @@ void adicao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = mais(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###      [ Adicao ]     ###\n" << 
             "\t###########################\n";
-    cout << "\t => RESULTADO: " << result << endl;
+    cout << "\t => RESULTADO: " << addition(a, b) << endl;
     cout << "\t [1] => Again" << endl;
     cout << "\t [0] => Go to menu" << endl;
     cout << "\t Choose: ";
     cin >> x;
     if (x == 1) {
-        adicao();
+        sum();
     } else {
-        main();
+        return;
     }
 }
 
-void multiplicacao(){
+void multiply(){
     system("clear");
-    float a, b, result, x;
+    int a, b, result, x;
     cout << "\t###########################\n" << 
             "\t###  [ Multiplicacao ]  ###\n" << 
             "\t###########################\n" <<
@@ -108,46 +118,65 @@ void multiplicacao(){
     cin >> a;
     cout << "\t => Insira o numero 2: ";
     cin >> b;
-    result = vezes(a, b);
     system("clear");
     cout << "\t###########################\n" << 
             "\t###  [ Multiplicacao ]  ###\n" << 
             "\t###########################\n";
-    cout << "\t => RESULTADO: " << result << endl;
+    cout << "\t => RESULTADO: " << multiplication(a, b) << endl;
     cout << "\t [1] => Again" << endl;
     cout << "\t [0] => Go to menu" << endl;
     cout << "\t Choose: ";
     cin >> x;
     if (x == 1) {
-        multiplicacao();
+        multiply();
     } else {
-        main();
+        return;
     }
 }
 
-void divisao(){
+void divide() {
     system("clear");
-    float a, b, result, x;
-    cout << "\t###########################\n" << 
-            "\t###     [ Divisao ]     ###\n" << 
-            "\t###########################\n" <<
-            "\t => Insira o divisor: ";
-    cin >> a;
+    int a, b, x;
+
+    cout << "\t###########################\n"
+         << "\t###     [ Divisao ]     ###\n"
+         << "\t###########################\n"
+         << "\t => Insira o divisor: ";
+
+    while (!(cin >> a)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "       Invalid input. Please enter a numeric value: ";
+    }
+
+    
     cout << "\t => Insira o quociente: ";
-    cin >> b;
-    result = dividir(a, b);
+    while (!(cin >> b) || b == 0) {
+        
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "       Invalid input. Please enter a non-zero numeric value: ";
+    }
+
     system("clear");
-    cout << "\t###########################\n" << 
-            "\t###     [ Divisao ]     ###\n" << 
-            "\t###########################\n";
-    cout << "\t => RESULTADO: " << result << endl;
-    cout << "\t [1] => Again" << endl;
-    cout << "\t [0] => Go to menu" << endl;
-    cout << "\t Choose: ";
-    cin >> x;
-    if (x == 1) {
-        divisao();
+    cout << "\t###########################\n"
+         << "\t###     [ Divisao ]     ###\n"
+         << "\t###########################\n";
+    
+    if (b != 0) {
+        cout << "\t => RESULTADO: " << division(a, b) << endl;
     } else {
-        main();
+        cout << "\t => Error: Division by zero\n";
+    }
+
+    cout << "\t [1] => Again\n"
+         << "\t [0] => Go to menu\n"
+         << "\t Choose: ";
+    cin >> x;
+
+    if (x == 1) {
+        divide();
+    } else {
+        return;
     }
 }

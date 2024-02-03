@@ -13,7 +13,7 @@ CPP_OBJECTS = $(CPP_SOURCES:.cpp=.o)
 ASM_OBJECTS = $(ASM_SOURCES:.asm=.o)
 
 # Executable
-TARGET = prog1
+TARGET = calc
 
 
 # Targets
@@ -21,12 +21,16 @@ all: $(TARGET)
 
 $(TARGET): $(CPP_OBJECTS) $(ASM_OBJECTS)
 	$(CC) $(CFLAGS) $^ -o $@
-
+	rm -rf *.o 
+	
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.asm
 	nasm $(ASMFLAGS) $< -o $@
 
-clean:
-	rm -f $(CPP_OBJECTS) $(ASM_OBJECTS) $(TARGET)
+
+	
+
+
+	
